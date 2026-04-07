@@ -1,5 +1,6 @@
 import { JSDOM } from 'jsdom';
 import { Readability } from '@mozilla/readability';
+import { safeFetch, MAX_RESPONSE_BYTES } from '@/lib/ssrf';
 
 export interface ArticleData {
   title: string;
@@ -11,7 +12,7 @@ export interface ArticleData {
 }
 
 export async function extractArticle(url: string): Promise<ArticleData> {
-  const response = await fetch(url, {
+  const response = await safeFetch(url, {
     headers: {
       'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36',
       Accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
@@ -24,7 +25,29 @@ export async function extractArticle(url: string): Promise<ArticleData> {
     throw new Error(`Failed to fetch URL: ${response.status} ${response.statusText}`);
   }
 
-  const html = await response.text();
+  // Stream-read the body and enforce the size cap even when Content-Length is absent
+  const reader = response.body?.getReader();
+  if (!reader) throw new Error('Response body is empty.');
+  const chunks: Uint8Array[] = [];
+  let totalBytes = 0;
+  while (true) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    totalBytes += value.byteLength;
+    if (totalBytes > MAX_RESPONSE_BYTES) {
+      await reader.cancel();
+      throw new Error('Article page exceeds the maximum allowed response size.');
+    }
+    chunks.push(value);
+  }
+  const html = new TextDecoder().decode(
+    chunks.reduce((acc, chunk) => {
+      const merged = new Uint8Array(acc.byteLength + chunk.byteLength);
+      merged.set(acc);
+      merged.set(chunk, acc.byteLength);
+      return merged;
+    }, new Uint8Array(0)),
+  );
   const dom = new JSDOM(html, { url });
 
   // Must run BEFORE Readability — Readability strips class attributes, so

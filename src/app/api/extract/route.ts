@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { extractArticle } from '@/lib/extractor';
 import { sanitizeHtml } from '@/lib/sanitize';
+import { validateOutboundUrl, SsrfError } from '@/lib/ssrf';
 
 export async function POST(request: NextRequest) {
   let url: string;
@@ -8,20 +9,32 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
     url = body?.url;
   } catch {
-    return NextResponse.json({ error: { code: 'BAD_REQUEST', message: 'Request body must be valid JSON with a "url" field.' } }, { status: 400 });
+    return NextResponse.json(
+      { error: { code: 'BAD_REQUEST', message: 'Request body must be valid JSON with a "url" field.' } },
+      { status: 400 },
+    );
   }
 
   if (!url || typeof url !== 'string') {
-    return NextResponse.json({ error: { code: 'INVALID_URL', message: 'A "url" string field is required.' } }, { status: 400 });
+    return NextResponse.json(
+      { error: { code: 'INVALID_URL', message: 'A "url" string field is required.' } },
+      { status: 400 },
+    );
   }
 
   try {
-    const parsed = new URL(url);
-    if (!['http:', 'https:'].includes(parsed.protocol)) {
-      return NextResponse.json({ error: { code: 'INVALID_URL', message: 'Only http and https URLs are supported.' } }, { status: 400 });
+    await validateOutboundUrl(url);
+  } catch (err) {
+    if (err instanceof SsrfError) {
+      return NextResponse.json(
+        { error: { code: err.code, message: err.message } },
+        { status: 400 },
+      );
     }
-  } catch {
-    return NextResponse.json({ error: { code: 'INVALID_URL', message: 'The provided URL is not valid.' } }, { status: 400 });
+    return NextResponse.json(
+      { error: { code: 'INVALID_URL', message: 'The provided URL is not valid.' } },
+      { status: 400 },
+    );
   }
 
   try {
