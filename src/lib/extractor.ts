@@ -54,8 +54,8 @@ export async function extractArticle(url: string): Promise<ArticleData> {
   // <span class="cyb-inline-code-labs"> becomes a bare <span> after parsing.
   normalizeCodeSpans(dom.window.document);
 
-  const reader = new Readability(dom.window.document);
-  const article = reader.parse();
+  const readability = new Readability(dom.window.document);
+  const article = readability.parse();
 
   if (!article) {
     throw new Error('Could not extract article content. The page may not contain a readable article.');
