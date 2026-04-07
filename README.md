@@ -1,3 +1,8 @@
+[![GitHub release][release-img]][release]
+[![License][license-img]][license]
+
+
+
 # Refyn
 
 Refyn is a web app that takes any article URL, extracts its content, and re-renders it with a clean, modern reading experience. It strips away cluttered layouts, ads, and distracting page furniture — giving you the article as it should read.
@@ -48,6 +53,8 @@ docker run -p 3000:3000 refyn
 
 Then open [http://localhost:3000](http://localhost:3000).
 
+<img width="2243" height="993" alt="image" src="https://github.com/user-attachments/assets/8df02189-8c62-4c5c-b062-b724f1630f06" />  
+
 ## Usage
 
 1. Paste an article URL into the input field and press **Refyn**
@@ -82,3 +89,9 @@ Refyn/
 ├── tailwind.config.ts
 └── tsconfig.json
 ```
+
+[release-img]: https://img.shields.io/github/release/g3rzi/Refyn.svg
+[release]: https://github.com/g3rzi/Refyn/releases
+
+[license-img]: https://img.shields.io/github/license/g3rzi/Refyn.svg
+[license]: https://github.com/g3rzi/Refyn/blob/master/LICENSE
