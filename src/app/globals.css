@@ -1,0 +1,435 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── CSS Custom Properties — one source of truth per theme ───────────────── */
+
+:root,
+[data-theme="midnight"] {
+  --page-bg:            #0a0a0f;
+  --page-bg2:           #13131f;
+  --page-border:        #2a2a3a;
+  --prose-text:         #dcdce8;
+  --prose-heading:      #ffffff;
+  --prose-accent:       #3b82f6;
+  --prose-muted:        #8888a0;
+  --prose-link:         #60a5fa;
+  --prose-link-hover:   #93c5fd;
+  --prose-pre-bg:       #111118;
+  --prose-pre-border:   #2a2a3a;
+  --prose-quote-bg:     #0f0f1c;
+  --prose-quote-border: #3b82f6;
+  --prose-quote-text:   #aaaabc;
+  --prose-divider:      #2a2a3a;
+  --prose-th-bg:        #13131f;
+  --prose-tr-alt:       #0d0d18;
+  --prose-td-text:      #c0c0d0;
+  --prose-selection:    #3b82f650;
+  --prose-font:         ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --prose-mono:         'JetBrains Mono', 'Cascadia Code', 'Fira Code', 'Consolas', monospace;
+  --header-text:        #ffffff;
+  --header-sub:         #8888a0;
+  --input-bg:           #13131f;
+  --input-border:       #2a2a3a;
+  --input-text:         #e8e8ed;
+  --input-placeholder:  #555570;
+  --btn-bg:             #3b82f6;
+  --btn-hover:          #2563eb;
+  --error-bg:           rgba(127,29,29,0.3);
+  --error-border:       rgba(153,27,27,0.6);
+  --error-text:         #fca5a5;
+  --skeleton-1:         #1e1e2e;
+  --skeleton-2:         #1a1a28;
+  --site-badge:         #3b82f6;
+  --article-border:     #1e1e2e;
+  --byline-color:       #8888a0;
+  --excerpt-color:      #aaaabc;
+  --excerpt-border:     #3b82f6;
+}
+
+[data-theme="clean"] {
+  --page-bg:            #f8f9fa;
+  --page-bg2:           #f1f3f5;
+  --page-border:        #e5e7eb;
+  --prose-text:         #374151;
+  --prose-heading:      #111827;
+  --prose-accent:       #2563eb;
+  --prose-muted:        #9ca3af;
+  --prose-link:         #2563eb;
+  --prose-link-hover:   #1d4ed8;
+  --prose-pre-bg:       #1e1e2e;
+  --prose-pre-border:   #374151;
+  --prose-quote-bg:     #eff6ff;
+  --prose-quote-border: #2563eb;
+  --prose-quote-text:   #4b5563;
+  --prose-divider:      #e5e7eb;
+  --prose-th-bg:        #f9fafb;
+  --prose-tr-alt:       #f3f4f6;
+  --prose-td-text:      #4b5563;
+  --prose-selection:    #2563eb30;
+  --prose-font:         ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --prose-mono:         'JetBrains Mono', 'Cascadia Code', 'Fira Code', 'Consolas', monospace;
+  --header-text:        #111827;
+  --header-sub:         #6b7280;
+  --input-bg:           #ffffff;
+  --input-border:       #d1d5db;
+  --input-text:         #111827;
+  --input-placeholder:  #9ca3af;
+  --btn-bg:             #2563eb;
+  --btn-hover:          #1d4ed8;
+  --error-bg:           #fef2f2;
+  --error-border:       #fecaca;
+  --error-text:         #dc2626;
+  --skeleton-1:         #e5e7eb;
+  --skeleton-2:         #f3f4f6;
+  --site-badge:         #2563eb;
+  --article-border:     #e5e7eb;
+  --byline-color:       #6b7280;
+  --excerpt-color:      #4b5563;
+  --excerpt-border:     #2563eb;
+}
+
+[data-theme="sepia"] {
+  --page-bg:            #f8f1e3;
+  --page-bg2:           #f0e8d5;
+  --page-border:        #d4c4a8;
+  --prose-text:         #4a3728;
+  --prose-heading:      #2d1f10;
+  --prose-accent:       #8b5523;
+  --prose-muted:        #9b8070;
+  --prose-link:         #7c3a10;
+  --prose-link-hover:   #5a2a08;
+  --prose-pre-bg:       #2d1f10;
+  --prose-pre-border:   #4a3728;
+  --prose-quote-bg:     #f0e4cc;
+  --prose-quote-border: #8b5523;
+  --prose-quote-text:   #6b4c38;
+  --prose-divider:      #d4c4a8;
+  --prose-th-bg:        #ede4d3;
+  --prose-tr-alt:       #f0e8d5;
+  --prose-td-text:      #5a4030;
+  --prose-selection:    #8b552330;
+  --prose-font:         Georgia, 'Times New Roman', serif;
+  --prose-mono:         'JetBrains Mono', 'Cascadia Code', 'Courier New', monospace;
+  --header-text:        #2d1f10;
+  --header-sub:         #9b8070;
+  --input-bg:           #fdf7ed;
+  --input-border:       #c8b89a;
+  --input-text:         #2d1f10;
+  --input-placeholder:  #a89070;
+  --btn-bg:             #8b5523;
+  --btn-hover:          #7c4520;
+  --error-bg:           #fef2f2;
+  --error-border:       #fecaca;
+  --error-text:         #b91c1c;
+  --skeleton-1:         #e8dcc8;
+  --skeleton-2:         #f0e8d5;
+  --site-badge:         #8b5523;
+  --article-border:     #d4c4a8;
+  --byline-color:       #9b8070;
+  --excerpt-color:      #6b4c38;
+  --excerpt-border:     #8b5523;
+}
+
+[data-theme="nord"] {
+  --page-bg:            #2e3440;
+  --page-bg2:           #3b4252;
+  --page-border:        #434c5e;
+  --prose-text:         #d8dee9;
+  --prose-heading:      #eceff4;
+  --prose-accent:       #88c0d0;
+  --prose-muted:        #616e88;
+  --prose-link:         #88c0d0;
+  --prose-link-hover:   #81a1c1;
+  --prose-pre-bg:       #242933;
+  --prose-pre-border:   #3b4252;
+  --prose-quote-bg:     #2e3440;
+  --prose-quote-border: #88c0d0;
+  --prose-quote-text:   #aab4c4;
+  --prose-divider:      #3b4252;
+  --prose-th-bg:        #3b4252;
+  --prose-tr-alt:       #272c36;
+  --prose-td-text:      #c0c8d8;
+  --prose-selection:    #88c0d040;
+  --prose-font:         ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --prose-mono:         'JetBrains Mono', 'Cascadia Code', 'Fira Code', 'Consolas', monospace;
+  --header-text:        #eceff4;
+  --header-sub:         #616e88;
+  --input-bg:           #3b4252;
+  --input-border:       #434c5e;
+  --input-text:         #eceff4;
+  --input-placeholder:  #616e88;
+  --btn-bg:             #88c0d0;
+  --btn-hover:          #81a1c1;
+  --error-bg:           rgba(191,97,106,0.15);
+  --error-border:       rgba(191,97,106,0.5);
+  --error-text:         #bf616a;
+  --skeleton-1:         #3b4252;
+  --skeleton-2:         #353a47;
+  --site-badge:         #88c0d0;
+  --article-border:     #3b4252;
+  --byline-color:       #616e88;
+  --excerpt-color:      #aab4c4;
+  --excerpt-border:     #88c0d0;
+}
+
+[data-theme="terminal"] {
+  --page-bg:            #0d0d0d;
+  --page-bg2:           #111111;
+  --page-border:        #003300;
+  --prose-text:         #33cc44;
+  --prose-heading:      #00ff41;
+  --prose-accent:       #00ff41;
+  --prose-muted:        #1a5c28;
+  --prose-link:         #00ff41;
+  --prose-link-hover:   #66ff88;
+  --prose-pre-bg:       #000d00;
+  --prose-pre-border:   #003300;
+  --prose-quote-bg:     #001800;
+  --prose-quote-border: #00ff41;
+  --prose-quote-text:   #33cc44;
+  --prose-divider:      #003300;
+  --prose-th-bg:        #001a00;
+  --prose-tr-alt:       #000d00;
+  --prose-td-text:      #33cc44;
+  --prose-selection:    #00ff4130;
+  --prose-font:         'Courier New', 'Lucida Console', monospace;
+  --prose-mono:         'Courier New', 'Lucida Console', monospace;
+  --header-text:        #00ff41;
+  --header-sub:         #1a5c28;
+  --input-bg:           #001800;
+  --input-border:       #003300;
+  --input-text:         #00ff41;
+  --input-placeholder:  #1a5c28;
+  --btn-bg:             #003300;
+  --btn-hover:          #004400;
+  --error-bg:           rgba(255,0,0,0.1);
+  --error-border:       rgba(255,0,0,0.4);
+  --error-text:         #ff4444;
+  --skeleton-1:         #001800;
+  --skeleton-2:         #000d00;
+  --site-badge:         #00ff41;
+  --article-border:     #003300;
+  --byline-color:       #1a5c28;
+  --excerpt-color:      #33cc44;
+  --excerpt-border:     #00ff41;
+}
+
+[data-theme="rose-pine"] {
+  --page-bg:            #191724;
+  --page-bg2:           #1f1d2e;
+  --page-border:        #26233a;
+  --prose-text:         #e0def4;
+  --prose-heading:      #e0def4;
+  --prose-accent:       #eb6f92;
+  --prose-muted:        #6e6a86;
+  --prose-link:         #c4a7e7;
+  --prose-link-hover:   #ebbcba;
+  --prose-pre-bg:       #1f1d2e;
+  --prose-pre-border:   #393552;
+  --prose-quote-bg:     #1f1d2e;
+  --prose-quote-border: #eb6f92;
+  --prose-quote-text:   #9893a5;
+  --prose-divider:      #26233a;
+  --prose-th-bg:        #26233a;
+  --prose-tr-alt:       #1f1d2e;
+  --prose-td-text:      #c8c4d8;
+  --prose-selection:    #eb6f9230;
+  --prose-font:         ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --prose-mono:         'JetBrains Mono', 'Cascadia Code', 'Fira Code', 'Consolas', monospace;
+  --header-text:        #e0def4;
+  --header-sub:         #6e6a86;
+  --input-bg:           #1f1d2e;
+  --input-border:       #26233a;
+  --input-text:         #e0def4;
+  --input-placeholder:  #6e6a86;
+  --btn-bg:             #eb6f92;
+  --btn-hover:          #d45e80;
+  --error-bg:           rgba(235,111,146,0.1);
+  --error-border:       rgba(235,111,146,0.4);
+  --error-text:         #eb6f92;
+  --skeleton-1:         #26233a;
+  --skeleton-2:         #221f30;
+  --site-badge:         #eb6f92;
+  --article-border:     #26233a;
+  --byline-color:       #6e6a86;
+  --excerpt-color:      #9893a5;
+  --excerpt-border:     #eb6f92;
+}
+
+/* ─── Base ───────────────────────────────────────────────── */
+@layer base {
+  html {
+    background-color: var(--page-bg);
+    color: var(--prose-text);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transition: background-color 0.25s ease, color 0.25s ease;
+  }
+  ::selection {
+    background-color: var(--prose-selection);
+    color: var(--prose-heading);
+  }
+}
+
+/* ─── Utilities ──────────────────────────────────────────── */
+@layer utilities {
+  .bg-noise {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+  }
+  .animate-fade-in {
+    animation: fadeIn 0.4s ease-out both;
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ─── Article Prose ──────────────────────────────────────── */
+.article-prose {
+  color: var(--prose-text);
+  font-size: 18px;
+  line-height: 1.85;
+  font-family: var(--prose-font);
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+.article-prose p { margin-top: 0; margin-bottom: 1.5em; }
+
+.article-prose h1, .article-prose h2, .article-prose h3,
+.article-prose h4, .article-prose h5, .article-prose h6 {
+  color: var(--prose-heading);
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  margin-top: 2.25em;
+  margin-bottom: 0.75em;
+}
+.article-prose h1 { font-size: 2em; }
+.article-prose h2 { font-size: 1.6em; }
+.article-prose h3 { font-size: 1.3em; }
+.article-prose h4 { font-size: 1.1em; }
+.article-prose h5 { font-size: 1em; font-weight: 600; }
+.article-prose h6 { font-size: 0.9em; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--prose-muted); }
+
+.article-prose a { color: var(--prose-link); text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.15s ease, color 0.15s ease; }
+.article-prose a:hover { color: var(--prose-link-hover); border-bottom-color: var(--prose-link); }
+
+.article-prose img {
+  display: block; max-width: 100%; height: auto;
+  border-radius: 10px;
+  box-shadow: 0 6px 32px rgba(0,0,0,0.4);
+  margin: 2.25em auto;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.article-prose img:hover { transform: scale(1.015); box-shadow: 0 10px 40px rgba(0,0,0,0.5); }
+
+.article-prose pre {
+  background: var(--prose-pre-bg);
+  border: 1px solid var(--prose-pre-border);
+  border-radius: 10px;
+  padding: 1.25em 1.5em;
+  overflow-x: auto;
+  margin: 1.75em 0;
+  font-size: 0.875em;
+  line-height: 1.7;
+}
+
+.article-prose code {
+  font-family: var(--prose-mono);
+  font-size: 0.875em;
+}
+
+/* Inline code — Wiz-style: accent tinted background, no border */
+.article-prose code:not(pre > code):not(pre code) {
+  background: color-mix(in srgb, var(--prose-accent) 12%, transparent);
+  color: var(--prose-accent);
+  border-radius: 4px;
+  padding: 0.2em 0.45em;
+  font-family: var(--prose-mono);
+  font-size: 0.875em;
+  font-weight: 400;
+  white-space: nowrap;
+  word-break: keep-all;
+}
+
+.article-prose blockquote {
+  border-left: 3px solid var(--prose-quote-border);
+  background: var(--prose-quote-bg);
+  padding: 1em 1.4em;
+  margin: 1.75em 0;
+  border-radius: 0 8px 8px 0;
+  color: var(--prose-quote-text);
+  font-style: italic;
+}
+.article-prose blockquote p:last-child { margin-bottom: 0; }
+
+.article-prose ul, .article-prose ol { padding-left: 1.6em; margin-bottom: 1.5em; }
+.article-prose li { margin-bottom: 0.45em; }
+.article-prose ul li { list-style-type: disc; }
+.article-prose ol li { list-style-type: decimal; }
+.article-prose ul ul, .article-prose ol ol,
+.article-prose ul ol, .article-prose ol ul { margin-top: 0.4em; margin-bottom: 0; }
+
+.article-prose hr { border: none; border-top: 1px solid var(--prose-divider); margin: 3em 0; }
+
+.article-prose figure { margin: 2.25em 0; }
+.article-prose figcaption { text-align: center; font-size: 0.85em; color: var(--prose-muted); margin-top: 0.75em; font-style: italic; }
+
+.article-prose table { width: 100%; border-collapse: collapse; margin: 2em 0; font-size: 0.9em; overflow-x: auto; display: block; }
+.article-prose thead { background: var(--prose-th-bg); }
+.article-prose th { color: var(--prose-heading); font-weight: 600; padding: 0.75em 1em; text-align: left; border: 1px solid var(--prose-divider); white-space: nowrap; }
+.article-prose td { padding: 0.7em 1em; border: 1px solid var(--prose-divider); color: var(--prose-td-text); vertical-align: top; }
+.article-prose tr:nth-child(even) td { background: var(--prose-tr-alt); }
+
+.article-prose details { border: 1px solid var(--prose-divider); border-radius: 8px; padding: 0.75em 1em; margin: 1.5em 0; }
+.article-prose summary { cursor: pointer; font-weight: 600; color: var(--prose-heading); list-style: none; }
+.article-prose summary::-webkit-details-marker { display: none; }
+
+.article-prose strong, .article-prose b { color: var(--prose-heading); font-weight: 700; }
+.article-prose mark { background-color: var(--prose-selection); color: var(--prose-link); padding: 0 0.2em; border-radius: 3px; }
+
+/* ─── Syntax Highlighting (highlight.js / atom-one-dark) ─── */
+
+/*
+ * We use our own <pre> background/padding, so strip what hljs adds on the
+ * <code> element itself — but leave colour alone so the theme's token
+ * colours render at full saturation.
+ */
+.article-prose pre code.hljs {
+  background: transparent;
+  padding: 0;
+  font-size: inherit;
+  /* DO NOT set color here — the theme's .hljs rule sets the base text colour;
+     overriding it would flatten all un-tokenised code to the prose body colour. */
+}
+
+/*
+ * Wrap the <pre> in a positioned container so we can place the
+ * language badge in the top-right corner via ::before.
+ */
+.article-prose pre {
+  position: relative;
+}
+
+/* Language badge — populated from the first hljs language class on <code> */
+.article-prose pre code[class*="language-"]::before,
+.article-prose pre code[class*="hljs-"]::before {
+  /* The badge text is set by JS after detection; fall back to nothing */
+  content: attr(data-language);
+  position: absolute;
+  top: 0.55rem;
+  right: 0.75rem;
+  font-family: var(--prose-mono);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--prose-muted);
+  pointer-events: none;
+  user-select: none;
+}
